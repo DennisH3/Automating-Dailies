@@ -28,7 +28,6 @@ Ensure that you are using R version 3.6.2 or above. You can see and change what 
 # Data
 
 Two full tables were downloaded as csv files.
-- 13100761 — used in 8_Step_Guide.Rmd (https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=1310076101)
 - 13100111 — used in Daily_Replication.Rmd (https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=1310011101)
 - 13100111-fr — used in Daily_Replication_Fr.Rmd (French version of the data)
 
