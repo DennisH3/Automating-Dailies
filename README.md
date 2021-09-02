@@ -37,7 +37,7 @@ Metadata for all the data is also provided.
 
 The daily replicated was the Canadian cancer statistics, 2020 which can be found here: https://www150.statcan.gc.ca/n1/daily-quotidien/200922/dq200922b-eng.htm
 
-For convenience, the daily is uploaded as Lung_Cancer_Daily_2020.pdf and Lung_Cancer_Daily_2020_fr.pdf
+For convenience, the original daily is uploaded as Lung_Cancer_Daily_2020.pdf and Lung_Cancer_Daily_2020_fr.pdf
 
 The data for the graphs were downloaded from the daily and are called:
 - lg_data.csv — line graph data for Chart 1
