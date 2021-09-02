@@ -1,11 +1,50 @@
 [(Français)](#le-nom-du-projet)
 
-## Name of the project
+## Automating Dailies
 
-- What is this project?
-- How does it work?
-- Who will use this project?
-- What is the goal of this project?
+# R Version
+R 4.0.5
+
+# Files
+
+There are 2 main files that can be referred to:
+- Daily_Replication.Rmd
+- Daily_Replication_Fr.Rmd (French version of the daily)
+
+The functions used in these notebooks can be found in:
+- daily_functions.R
+
+# Code dependencies
+
+This file uses four packages: tidyverse, data.table, janitor, and plotly.
+
+- tidyverse is the standard collection of R packages. Some important packages it includes are: dplyr, ggplot2, stringr, tidyr, tibble, readr, etc.
+- data.table is a package used for data manipulation. It also enables the use of the `%>%` operator.
+- janitor is a package that cleans data. It is used to clean the column names of the data frame
+- plotly is a package that generates plots. It is an alternative to the ggplot2, and creates interactive plots.
+
+Ensure that you are using R version 3.6.2 or above. You can see and change what version of R you are using in RStudio by going to the Tools tab -> Global options -> R Version.
+
+# Data
+
+Two full tables were downloaded as csv files.
+- 13100761 — used in 8_Step_Guide.Rmd (https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=1310076101)
+- 13100111 — used in Daily_Replication.Rmd (https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=1310011101)
+- 13100111-fr — used in Daily_Replication_Fr.Rmd (French version of the data)
+
+Metadata for all the data is also provided.
+
+# Daily
+
+The daily replicated was the Canadian cancer statistics, 2020 which can be found here: https://www150.statcan.gc.ca/n1/daily-quotidien/200922/dq200922b-eng.htm
+
+For convenience, the daily is uploaded as Lung_Cancer_Daily_2020.pdf and Lung_Cancer_Daily_2020_fr.pdf
+
+The data for the graphs were downloaded from the daily and are called:
+- lg_data.csv — line graph data for Chart 1
+- bar_data.csv — bar graph data for Chart 2
+- lg_data_fr.csv — line graph data for Chart 1 (French)
+- bar_data_fr.csv — bar graph data for Chart 2 (French)
 
 ### How to Contribute
 

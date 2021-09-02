@@ -1,0 +1,537 @@
+---
+title: "CHPD Daily Replication Fr"
+output:
+  word_document: null
+  html_document:
+    df_print: paged
+  pdf_document: default
+always_allow_html: yes
+---
+
+Useful source for understanding RMarkdown: https://bookdown.org/yihui/markdown-cookbook
+
+To knit the daily without any code chunks, you can set the parameters in code chunks options. Note that figure captions is a parameter in the code chunk. The full list of code chunk options can be found here: https://yihui.org/knitr/options/
+
+Use `echo=FALSE` when coding to see the outputs in the RMarkdown. Once everything is ready to be knit, change it to `include=FALSE`.
+
+```{r, include=FALSE, warning=FALSE}
+# Import packages
+library(tidyverse)
+library(data.table)
+library(janitor)
+library(plotly)
+
+# Source the functions
+source("daily_functions.R")
+```
+
+```{r, include=FALSE}
+# Load the data
+
+# Read the csv file and clean the column names
+df <- clean_names(read.csv2("./Data/13100111-fr.csv", encoding="UTF-8"))
+
+df$valeur <- as.numeric(df$valeur)
+
+# Display the data frame. When knit, the entire data frame is shown column by column which creates many pages, so let's use the head() function to check it was read.
+head(df)
+
+# Print the column names. This will make it easier to select which columns to keep
+print(colnames(df))
+```
+
+```{r, include=FALSE}
+# Data manipulation
+
+# Select which columns to keep
+df <- select(df, c("x_u_feff_periode_de_reference", "geo", "groupe_d_age", "sexe", 
+                   "types_primaires_de_cancer_cim_o_3", "caracteristiques", "valeur", "unite_de_mesure"))
+
+# Clean the primary type of cancer column
+# Remove anything after the cancer type
+df$types_primaires_de_cancer_cim_o_3 <- gsub(" \\[[^\\]]*\\]", "", df$types_primaires_de_cancer_cim_o_3, perl = TRUE)
+
+# Display
+head(df)
+```
+
+```{r, include=FALSE}
+# Find NAs in valeur
+sapply(df, FUN = function(x) sum(is.na(x)))
+
+df <- df[!is.na(df$valeur), ]
+```
+
+```{r, include=FALSE}
+# Find the most commonly diagnosed cancer
+
+# Find the most commmon cancer type in Canada for all ages, both sexes per year
+mostCommon <- df %>%
+  
+  # Filter (Note: From 2011 to 2017, Quebec was excluded)
+  filter(geo %in% c("Canada", "Canada (excluant le Québec)"),
+         groupe_d_age == "Total, tous les âges",
+         sexe == "Les deux sexes",
+         types_primaires_de_cancer_cim_o_3 != "Total, tous les sièges primaires de cancer",
+         caracteristiques == "Nombre de nouveaux cas de cancer") %>%
+  
+  # Group by reference period
+  group_by(x_u_feff_periode_de_reference) %>%
+  
+  # Filter for the max
+  filter(valeur == max(valeur)) %>%
+  
+  # Display from most recent to least recent
+  arrange(desc(x_u_feff_periode_de_reference))
+
+mostCommon
+```
+
+```{r, include=FALSE}
+# Save the mode for the most common type of cancer
+mcCancer <- get_mode(mostCommon$types_primaires_de_cancer_cim_o_3)
+
+mcCancer
+```
+
+Assume that the daily will be written for the current year. 
+
+# Statistiques canadiennes sur le cancer : Rapport spécial de `r format(Sys.Date(), "%Y")` sur le cancer du `r mcCancer`
+
+## Le cancer du `r str_to_lower(mcCancer)` est le cancer le plus souvent diagnostiqué et la première cause de décès attribuable au cancer
+```{r, echo = FALSE, results='asis'}
+# Note 1: Did not do the analysis for sum of colorectal, pancreatic, and breast cancers or the statistic for 2020 and estimated death toll.
+# Note 2: Formatting such as italics, bolding, underlining, etc. will have to be done in Word.
+
+
+p <- str_glue(
+
+"Le cancer du {str_to_lower(mcCancer)} est le cancer le plus souvent diagnostiqué et la première cause de décès attribuable au cancer au Canada. Un plus grand nombre de Canadiens meurent du cancer du {str_to_lower(mcCancer)} que des cancers colorectal, pancréatique et du sein combinés. En {format(Sys.Date(), \"%Y\")}, on estime que plus de 21 000 Canadiens mourront du cancer du {str_to_lower(mcCancer)}. Le taux élevé de décès (taux de mortalité) attribuable au cancer du {str_to_lower(mcCancer)} reflète à la fois son taux élevé de diagnostic (taux d'incidence) et son faible taux de survie.
+
+Le document Statistiques canadiennes sur le cancer : Rapport spécial de {format(Sys.Date(), \"%Y\")} sur le cancer du mcCancer, élaboré par le Comité consultatif des statistiques canadiennes sur le cancer, en collaboration avec la Société canadienne du cancer, Statistique Canada et l'Agence de la santé publique du Canada, jette un nouvel éclairage sur les tendances en matière de cancer du {str_to_lower(mcCancer)} au Canada. Le rapport {conjugateFr(\"présenter\")} également des renseignements concernant des enjeux importants et émergents liés au cancer du {str_to_lower(mcCancer)}, tels que les facteurs de risque, le dépistage et les traitements. Bien que les résultats aient été obtenus avant la pandémie de COVID-19, ils {conjugateFr(\"fournir\", q=1)} un point de référence pour mesurer les répercussions de la pandémie sur les taux d'incidence, de mortalité et de survie liés au cancer du {str_to_lower(mcCancer)}.
+"
+)
+
+p
+```
+
+```{r, include=FALSE}
+# Check the unique values in these columns
+unique(df$groupe_d_age)
+unique(df$sexe)
+unique(df$caracteristiques)
+```
+
+```{r, include=FALSE}
+# Finding trends with incidence rates
+
+# Take note of the uom.
+uom <- "Taux per 100,000 personnes"
+
+irAgeSex <- df %>%
+  
+  # Filter the data. Note: if wanted most recent year(s), would add it as a filter
+  filter(geo %in% c("Canada", "Canada (excluant le Québec)"),
+         groupe_d_age != "Total, tous les âges",
+         groupe_d_age != "Groupe d'âge, non déclaré",
+         sexe != "Les deux sexes",
+         types_primaires_de_cancer_cim_o_3 == "Poumon et bronche",
+         caracteristiques == "taux d'incidence du cancer") %>%
+  
+  # Select which columns to keep (Know that it's lung and bronchus cancer and cancer incidence rate)
+  select(., c("x_u_feff_periode_de_reference", "geo", "groupe_d_age", "sexe", "valeur"))
+
+irAgeSex
+```
+
+```{r, include=FALSE}
+irAgeSex2017 <- df %>%
+  
+  # Filter the data. Note: if wanted most recent year(s), would add it as a filter
+  filter(x_u_feff_periode_de_reference == 2017,
+         geo %in% c("Canada", "Canada (excluant le Québec)"),
+         groupe_d_age != "Total, tous les âges",
+         groupe_d_age != "Groupe d'âge, non déclaré",
+         sexe == "Les deux sexes",
+         types_primaires_de_cancer_cim_o_3 == "Poumon et bronche",
+         caracteristiques == "taux d'incidence du cancer") %>%
+  
+  # Select which columns to keep (Know that it's lung and bronchus cancer and cancer incidence rate)
+  select(., c("x_u_feff_periode_de_reference", "geo", "groupe_d_age", "sexe", "valeur"))
+
+
+irAgeSex2017
+```
+
+```{r, include=FALSE}
+# Calculate the age group by age group difference
+irAgeSex2017 <- irAgeSex2017 %>%
+  mutate(val_change = valeur-lag(valeur))
+
+# Replace the NA value in the first row
+irAgeSex2017$val_change[is.na(irAgeSex2017$val_change)] <- 0
+
+# Gives sign to indicate if there was an increase or decrease
+irAgeSex2017$Sign <- sign(irAgeSex2017$val_change)
+
+irAgeSex2017
+```
+
+```{r, include=FALSE}
+# Check if there was a large change
+# Input: x - A list; thr - the threshold to determine "large" (numeric)
+# Ouput: dramatically or the null character
+
+# Feature: Have a list of synonyms for dramatically, and randomly return one if true
+
+isDramaticFr <- function(x, thr){
+  
+  # Take the absolute value for each item in the list 
+  a <- abs(x)
+  
+  # If the absolute range is large, the change was drastic
+  if(max(a)-min(a) > thr) {
+    
+    return("radicalement")
+    
+  } else {
+    
+    return("")
+    
+  }
+  
+}
+
+# Check if there was an overall change and indicate its direction. First value - last value. Assumes the data frame is sorted by one of its columns
+# Input: x - A list
+# Ouput: dramatically or the null character
+
+isChangeFr <- function(x) {
+  
+  # If the first value is less than the last value, there was an increase
+  if(head(x, 1) < tail(x, 1)) {
+    
+    return("augmente")
+    
+  # Else if the first value is larger than the last value, there was a decrease
+  } else if (head(x, 1) > tail(x, 1)) {
+    
+    return("baisse")
+    
+  # Else there was no change
+  } else {
+    
+    return("reste constant")
+    
+  }
+}
+```
+
+```{r, include=FALSE}
+ag <- irAgeSex2017 %>%
+  filter(valeur == max(valeur))
+
+ag$groupe_d_age
+```
+
+```{r, include=FALSE}
+# Compare incidence rate between sexes
+irAgeSex <- df %>%
+  
+  # Filter the data.
+  filter(x_u_feff_periode_de_reference == "2017",
+         geo %in% c("Canada", "Canada (excluant le Québec)"),
+         groupe_d_age != "Total, tous les âges",
+         groupe_d_age != "Groupe d'âge, non déclaré",
+         sexe != "Les deux sexes",
+         types_primaires_de_cancer_cim_o_3 == "Poumon et bronche",
+         caracteristiques == "taux d'incidence du cancer") %>%
+  
+  # Select which columns to keep (Know that it's lung and bronchus cancer and cancer incidence rate)
+  select(., c("x_u_feff_periode_de_reference", "geo", "groupe_d_age", "sexe", "valeur"))
+
+irAgeSex
+
+irAgeSexAvg <- irAgeSex %>%
+  
+  group_by(sexe) %>%
+  
+  summarise(average = mean(valeur))
+  
+  #mutate(val_change = value-lag(value))
+
+# Replace the NA value in the first row
+#irAgeSex$val_change[is.na(irAgeSex$val_change)] <- 0
+
+# Will always return sexe in alphabetical order
+irAgeSexAvg
+
+gir <- gr(irAgeSexAvg$average[1], irAgeSexAvg$average[2], "femmes", "hommes")
+
+pct_dif(irAgeSexAvg$average[2], irAgeSexAvg$average[1])
+```
+
+```{r, include=FALSE}
+irAgeSex17 <- irAgeSex %>%
+  
+  # Group_by age group
+  group_by(groupe_d_age) %>%
+  
+  # Find the difference between femmes and hommes (femmes are always second)
+  summarise(fm_diff = valeur[2]-valeur[1])
+
+# Reorder 5 to 9 years to be the 2nd row
+irAgeSex17 <- irAgeSex17[c(1, 10, 2:9, 11:19), ]
+
+irAgeSex17
+```
+
+
+# Les taux de cancer du `r mcCancer` augmentent considérablement avec l'âge et sont `r isChangeFr(irAgeSex2017$valeur)` `r isDramaticFr(irAgeSex2017$valeur, 300)` chez les cancer `r gir[1]` que chez les `r gir[2]`
+```{r, echo = FALSE, results='asis'}
+# Note: The data did not have mortality data, but it would follow the same steps as incidence rate
+# For the last sentence, it is easier to look at the fm_diff table to identify the trend than to automate it. If automation is necessary, have an analyst determine what the best approach for this is.
+
+p2 <- str_glue("Les taux d'incidence et de mortalité attribuable au cancer du {str_to_lower(mcCancer)} {isChangeFr(irAgeSex2017$valeur)}nt {isDramaticFr(irAgeSex2017$valeur, 300)} avec l'âge. Les taux d'incidence atteignent un sommet chez les Canadiens de {ag$groupe_d_age} ans ({unitMeasureFr(uom, floor(ag$valeur), \"personnes\")}), tandis que les taux de mortalité {conjugateFr(\"culminer\", q=1)} chez les Canadiens de 85 ans et plus (352 pour 100 000 personnes). Dans l'ensemble, le taux d'incidence du cancer du {str_to_lower(mcCancer)} est environ {round(pct_dif(irAgeSexAvg$average[2], irAgeSexAvg$average[1]))} % plus élevé chez les {gir[1]} que chez les {gir[2]} et le taux de mortalité est environ 31 % plus élevé chez les hommes que chez les femmes. Toutefois, parmi les Canadiens de moins de 55 ans, les taux sont plus élevés chez les femmes que chez les hommes.
+"
+)
+
+p2
+```
+
+```{r, include=FALSE}
+irAgeSex92v12 <- df %>%
+  
+  # Filter the data.
+  filter(x_u_feff_periode_de_reference %in% c("1992", "2012"),
+         geo %in% c("Canada", "Canada (excluant le Québec)"),
+         groupe_d_age == "Total, tous les âges",
+         sexe != "Les deux sexes",
+         types_primaires_de_cancer_cim_o_3 == "Poumon et bronche",
+         caracteristiques == "taux d'incidence du cancer") %>%
+  
+  # Select which columns to keep (Know that it's lung and bronchus cancer and cancer incidence rate)
+  select(., c("x_u_feff_periode_de_reference", "geo", "groupe_d_age", "sexe", "valeur"))
+
+irAgeSex92v12
+```
+
+```{r, include=FALSE}
+irAgeSex92v12 <- df %>%
+  
+  # Filter the data.
+  filter(x_u_feff_periode_de_reference %in% c(1992, 2012),
+         geo %in% c("Canada", "Canada (excluant le Québec)"),
+         groupe_d_age == "Total, tous les âges",
+         sexe != "Les deux sexes",
+         types_primaires_de_cancer_cim_o_3 == "Poumon et bronche",
+         caracteristiques == "taux d'incidence du cancer") %>%
+  
+  # Select which columns to keep (Know that it's lung and bronchus cancer and cancer incidence rate)
+  select(., c("x_u_feff_periode_de_reference", "geo", "groupe_d_age", "sexe", "valeur"))
+
+irSex_diff <- df %>%
+  
+  # Filter the data.
+  filter(x_u_feff_periode_de_reference %in% c(1992:2012),
+         geo == "Canada (excluant le Québec)",
+         groupe_d_age == "Total, tous les âges",
+         sexe != "Les deux sexes",
+         types_primaires_de_cancer_cim_o_3 == "Poumon et bronche",
+         caracteristiques == "taux d'incidence du cancer") %>%
+  
+  # Select which columns to keep (Know that it's lung and bronchus cancer and cancer incidence rate)
+  select(., c("x_u_feff_periode_de_reference", "geo", "sexe", "valeur"))  %>%
+  
+  # Group_by age group
+  group_by(sexe) %>%
+  
+  # Find the difference between years for femmes and hommes
+  summarise(fm_diff = valeur[2]-valeur[1], .groups = "drop")
+
+# Display
+irSex_diff
+
+# Filter by respective sexe
+irMale_diff <- filter(irSex_diff, sexe == "Hommes")
+irFemale_diff <- filter(irSex_diff, sexe == "Femmes")
+
+# Filter for recent years
+irSexRecent_diff <- df %>%
+  
+  # Filter the data.
+  filter(x_u_feff_periode_de_reference %in% c(2013:2017),
+         geo == "Canada (excluant le Québec)",
+         groupe_d_age == "Total, tous les âges",
+         sexe != "Les deux sexes",
+         types_primaires_de_cancer_cim_o_3 == "Poumon et bronche",
+         caracteristiques == "taux d'incidence du cancer") %>%
+  
+  # Select which columns to keep (Know that it's lung and bronchus cancer and cancer incidence rate)
+  select(., c("x_u_feff_periode_de_reference", "geo", "sexe", "valeur"))  %>%
+  
+  # Group_by age group
+  group_by(sexe) %>%
+  
+  # Find the difference between years for femmes and hommes
+  summarise(fm_diff = valeur[2]-valeur[1], .groups = "drop")
+
+# Display
+irSexRecent_diff
+
+# Filter for respective sexe
+irMaleRecent_diff <- filter(irSex_diff, sexe == "Hommes")
+irFemaleRecent_diff <- filter(irSex_diff, sexe == "Femmes")
+
+# Compare rates between female and male
+rate <- case_when(irMaleRecent_diff$fm_diff < 0 & irFemaleRecent_diff$fm_diff < 0 ~ "diminué chez les deux sexes",
+                  irMaleRecent_diff$fm_diff > 0 & irFemaleRecent_diff$fm_diff < 0 ~ "augmenté chez hommes et diminué chez femmes",
+                  irMaleRecent_diff$fm_diff < 0 & irFemaleRecent_diff$fm_diff > 0 ~ "augmenté chez femmes et diminué chez hommes",
+                  irMaleRecent_diff$fm_diff > 0 & irFemaleRecent_diff$fm_diff > 0 ~ "augmenté chez les deux sexes"
+                  )
+```
+
+# Les taux de diagnostic du cancer du `r str_to_lower(mcCancer)` chez les hommes et les femmes convergent avec le temps
+```{r, echo = FALSE, results='asis'}
+# For the last couple of sentences, it is easier to look at the fm_diff table to identify the trend than to automate it. If automation is necessary, have an analyst determine what the best approach for this is.
+
+p3 <- str_glue("Bien qu'ils soient plus élevés chez les hommes que chez les femmes, les taux d'incidence du cancer du {str_to_lower(mcCancer)} {conjugateFr(\"se rapprocher\", q=1)} avec le temps. En 1992, le taux d'incidence du cancer du {str_to_lower(mcCancer)} chez les hommes ({unitMeasureFr(uom, irAgeSex92v12$valeur[3], \"hommes\")}) était plus de deux fois supérieur à celui enregistré chez les femmes ({unitMeasureFr(uom, irAgeSex92v12$valeur[4], \"femmes\")}). Or, en 2012, l'écart s'était considérablement rétréci ({unitMeasureFr(uom, irAgeSex92v12$valeur[5], \"hommes\")} par rapport à {unitMeasureFr(uom, irAgeSex92v12$valeur[6], \"femmes\")}) en raison de la {case_when(irMale_diff$fm_diff < 0 ~ \"diminution\", irMale_diff$fm_diff > 0 ~ \"augmentation\", TRUE ~ \"constante\")} des taux chez les hommes et de leur {case_when(irFemale_diff$fm_diff < 0 ~ \"diminution\", irFemale_diff$fm_diff > 0 ~ \"augmentation\", TRUE ~ \"constante\")} chez les femmes. Les taux ont par la suite {rate}, mais de façon plus rapide chez les hommes.
+
+L'écart entre les tendances des taux de cancer du {str_to_lower(mcCancer)} chez les hommes et les femmes reflète en grande partie les écarts antérieurs liés au tabagisme. Chez les hommes, la prévalence des fumeurs quotidiens {conjugateFr(\"commencer\", t=1)} à diminuer au milieu des années 1960 au Canada et {conjugateFr(\"précéder\", t=1)} d'environ 20 ans la baisse de l'incidence du cancer du {str_to_lower(mcCancer)}. Chez les femmes, la diminution du tabagisme quotidien n'{conjugateFr(\"débuter\", t=1)} qu'au cours des années 1980. Les tendances des taux de mortalité attribuable au cancer du {str_to_lower(mcCancer)} suivent essentiellement les tendances de l'incidence du cancer du {str_to_lower(mcCancer)}.
+")
+
+p3
+```
+
+```{r, include=FALSE}
+# Load the data
+lineGraph <- read.csv("./Data/lg_data_fr.csv", strip.white = TRUE, na.strings = NA, skip = 1)
+
+# Rename the columns
+names(lineGraph)[1] <- c("Year")
+
+# Store the last row valeur
+source <- tail(lineGraph$Year, 1)
+
+source <-paste(source)
+
+# Remove it
+lineGraph <- head(lineGraph, -1)
+
+# Convert character type to numeric
+lineGraph$Year <- as.numeric(lineGraph$Year)
+
+# Display
+lineGraph
+```
+
+```{r, include=FALSE}
+# Unfortunately, Plotly graphs cannot be knit to word. However, they can be knit to html and then saved. You will then have 2 options to insert the image into word. 1. Insert Image in Word as you would do any image. 2. Have RMarkdown knit the image to word using this command: `![Caption][Path/to/plot.png]`
+
+# Plot the data
+lg <- plot_ly(lineGraph, x = ~Year, y = ~Hommes, name = "Hommes", type = 'scatter', mode = 'lines') %>%
+  add_trace(y = ~Femmes, name = "Femmes", mode = 'lines') %>%
+  layout(title = list(text = "taux (pour 100 000 personnes)", x = 0.01),
+         xaxis = list(title = "", dtick = 2),
+         yaxis = list(title=""),
+         legend = list(orientation = 'h'),
+         annotations = list(x = -0.08, y = -0.2, text = source, showarrow = FALSE, xref="paper", yref="paper"))
+
+lg
+```
+
+# Graphique 1
+# Tendance du taux d'incidence du cancer du poumon normalisé selon l'âge, selon le sexe, Canada (à l'exclusion du Québec), 1992 à 2016
+```{r, echo=FALSE, fig.cap="Source(s) : Registre canadien du cancer (3207)."}
+# Pivot data for ggplot
+lineGraph <- pivot_longer(lineGraph, cols = c("Hommes", "Femmes"), names_to = "Sex", values_to = "Rate")
+
+# Define order of legend
+lineGraph$Sex <- factor(lineGraph$Sex, levels = c("Hommes", "Femmes"))
+
+lg <- ggplot(lineGraph, aes(x=Year, y=Rate, group=Sex)) +
+  geom_line(aes(color=Sex)) +
+  labs(title = "taux (pour 100 000 personnes)", x = "", y = "") +
+  scale_x_continuous(breaks=seq(1992, 2016, 2)) +
+  theme_linedraw() + 
+  theme(legend.position = "bottom", 
+        legend.title = element_blank(),
+        panel.grid = element_blank())
+
+lg
+```
+
+# Le taux de survie au cancer du `r str_to_lower(mcCancer)` est plus élevé chez les femmes que chez les hommes
+```{r, echo = FALSE, results='asis'}
+# Note: For p4 and p5, I did not have the data to generate their values
+
+p4 <- str_glue("Le taux de survie au cancer du {str_to_lower(mcCancer)} est généralement plus élevé chez les femmes que chez les hommes, peu importe l'âge ou la province au moment du diagnostic. Par exemple, la survie nette après cinq ans chez les femmes était de 22 % comparativement à 15 % chez les hommes. Bien que les femmes {conjugateFr(\"afficher\", q=1)} généralement une meilleure survie pour plusieurs cancers, c'est particulièrement le cas du cancer du {str_to_lower(mcCancer)}.")
+
+p4
+```
+
+# Environ la moitié des cas de cancer du `r str_to_lower(mcCancer)` sont diagnostiqués au dernier stade, lorsque la survie est extrêmement faible
+```{r, echo = FALSE, results='asis'}
+p5 <- str_glue("La stadification est une façon de classer un cancer en fonction de l'étendue de la maladie dans le corps au moment du diagnostic. Les stades {conjugateFr(\"varier\", q=1)} habituellement de I à IV; plus le nombre est élevé, plus la maladie s'est propagée dans le corps depuis l'origine du cancer. Environ la moitié de tous les cancers du {str_to_lower(mcCancer)} sont diagnostiqués au stade IV, celui où la survie nette est extrêmement faible, soit 5 % sur trois ans. En revanche, un peu moins de 1 cancer du {str_to_lower(mcCancer)} sur 10 est diagnostiqué au stade I, celui où le cancer est relativement petit et contenu dans le poumon, et où le pronostic sur trois ans est bien meilleur (71 %).")
+
+p5
+```
+
+# Graphique 2
+# Estimations de la survie nette au cancer du poumon prédite sur une période de trois ans, selon le stade au moment du diagnostic, Canada (à l'exclusion du Québec), 2012 à 2014
+```{r, include=FALSE}
+# Load the data
+barGraph <- read.csv("./Data/bar_data_fr.csv", header = FALSE, strip.white = TRUE, na.strings = NA, skip = 1)
+
+# Rename the first column to Year
+names(barGraph) <- c("Stade", "Survie Nette (%)")
+
+# Store the last row valeur
+source <- tail(barGraph$Stade, 1)
+
+# Make the annotation 1 string
+source <- str_squish(paste(source))
+
+source
+
+# Remove last row
+barGraph <- head(barGraph, -1)
+
+# Convert factor type to character
+#barGraph$Stade <- as.character(levels(barGraph$Stade)[barGraph$Stade])
+
+# Display
+barGraph
+```
+
+```{r, include=FALSE}
+# Plot the data
+bg <- plot_ly(map_df(barGraph, rev), x = ~`Survie Nette (%)`, y = ~Stade, type = 'bar', orientation = 'h') %>%
+  layout(xaxis = list(title = "survie nette (%)", dtick = 20),
+         # Specify the order of the columns, for some reason the data frame had to be reversed as well
+         yaxis = list(title = "", categoryorder="array", categoryarray = ~Stade),
+         margin = list(b = 100, pad = 20),
+         # Instead of using an annotation, I would recommend just printing the caption underneath the graph as done 
+         # in the daily or you can add the fig.cap parameter at the top of the chunk and type/paste the caption.
+         annotations = list(x = -0.2, y = -0.25, text = source, font=list(size=7.8), 
+                            showarrow = FALSE, xref="paper", yref="paper"))
+
+bg
+```
+
+```{r, echo=FALSE, fig.cap="Source(s) : Registre canadien du cancer (3207) couplé à des données sur la mortalité provenant de la Base de données sur les décès de la Statistique de l'état civil (3233) et à des renseignements sur les décès extraits du Fichier maître des particuliers T1 (RCC-BCDECD-FMPT1)."}
+
+# Specify the order
+barGraph$Stade <- factor(barGraph$Stade, levels=(rev(barGraph$Stade)))
+
+bg <- ggplot(barGraph, aes(x = Stade, y = `Survie Nette (%)`)) +
+  geom_col(fill="skyblue2", color="black") +
+  scale_y_continuous(breaks = seq(0, 80, 20), expand = expansion(mult=c(0,0.1))) +
+  labs(x = "") +
+  theme_linedraw() + 
+  theme(panel.grid = element_blank()) +
+  coord_flip()
+
+bg
+```
+
