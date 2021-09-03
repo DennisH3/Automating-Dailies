@@ -1,0 +1,159 @@
+﻿"Cube Title","Product Id","CANSIM Id",URL,"Cube Notes","Archive Status",Frequency,"Start Reference Period","End Reference Period","Total number of dimensions"
+"Number and rates of new cases of primary cancer, by cancer type, age group and sex",13100111,103-0550,"https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310011101",1;3;9;21,"CURRENT - a cube available to the public and that is current",Annual,1992-01-01,2017-01-01,5
+
+"Dimension ID","Dimension name","Dimension Notes","Dimension Correction Notes","Dimension Definitions"
+1,Geography,,,
+2,"Age group",,,
+3,Sex,,,
+4,"Primary types of cancer (ICD-O-3)",3;9,,
+5,Characteristics,18;19,,
+
+"Dimension ID","Member Name","Classification Code","Member ID","Parent Member ID",Terminated,"Member Notes","Member Correction Notes","Member Geo Attribute Keys","Member Definitions"
+1,Canada,[11124],1,,,,,,
+1,"Newfoundland and Labrador",[10],2,15,,5,,,
+1,"Prince Edward Island",[11],3,15,,,,,
+1,"Nova Scotia",[12],4,15,,,,,
+1,"New Brunswick",[13],5,15,,,,,
+1,Quebec,[24],6,15,,5;22,,,
+1,Ontario,[35],7,15,,5;23,,,
+1,Manitoba,[46],8,15,,5,,,
+1,Saskatchewan,[47],9,15,,,,,
+1,Alberta,[48],10,15,,,,,
+1,"British Columbia",[59],11,15,,,,,
+1,Yukon,[60],12,15,,,,,
+1,"Northwest Territories",[61],13,15,,,,,
+1,Nunavut,[62],14,15,,,,,
+1,"Canada (excluding Quebec)",,15,,,22,,,
+2,"Total, all ages",,1,,,,,,
+2,"0 to 4 years",,2,1,,,,,
+2,"5 to 9 years",,3,1,,,,,
+2,"10 to 14 years",,4,1,,,,,
+2,"15 to 19 years",,5,1,,,,,
+2,"20 to 24 years",,6,1,,,,,
+2,"25 to 29 years",,7,1,,,,,
+2,"30 to 34 years",,8,1,,,,,
+2,"35 to 39 years",,9,1,,,,,
+2,"40 to 44 years",,10,1,,,,,
+2,"45 to 49 years",,11,1,,,,,
+2,"50 to 54 years",,12,1,,,,,
+2,"55 to 59 years",,13,1,,,,,
+2,"60 to 64 years",,14,1,,,,,
+2,"65 to 69 years",,15,1,,,,,
+2,"70 to 74 years",,16,1,,,,,
+2,"75 to 79 years",,17,1,,,,,
+2,"80 to 84 years",,18,1,,,,,
+2,"Age group, not stated",,20,1,,,,,
+2,"85 to 89 years",,21,1,,,,,
+2,"90 years and over",,22,1,,,,,
+3,"Both sexes",,1,,,,,,
+3,Males,,2,1,,,,,
+3,Females,,3,1,,,,,
+4,"Total, all primary sites of cancer",[C00.0-C80.9],1,,,25,,,
+4,Lip,[C00.0-C00.9],2,1,,10,,,
+4,Tongue,[C01.9-C02.9],3,1,,10,,,
+4,"Salivary gland",[C07.9-C08.9],4,1,,10,,,
+4,"Floor of mouth",[C04.0-C04.9],5,1,,10,,,
+4,"Gum and other mouth","[C03.0-C03.9, C05.0-C05.9, C06.0-C06.9]",6,1,,10,,,
+4,Nasopharynx,[C11.0-C11.9],7,1,,10,,,
+4,Oropharynx,[C10.0-C10.9],8,1,,10,,,
+4,Hypopharynx,"[C12.9, C13.0-C13.9]",9,1,,10,,,
+4,"Other oral cavity and pharynx","[C09.0-C09.9, C14.0-C14.8]",10,1,,10,,,
+4,Esophagus,[C15.0-C15.9],11,1,,10,,,
+4,Stomach,[C16.0-C16.9],12,1,,10,,,
+4,"Small intestine",[C17.0-C17.9],13,1,,10,,,
+4,"Colon excluding rectum","[C18.0-C18.9, C26.0]",14,56,,10,,,
+4,"Rectum and rectosigmoid","[C19.9, C20.9]",15,56,,10,,,
+4,"Anus, anal canal and anorectum",[C21.0-C21.8],16,1,,10,,,
+4,Liver,[C22.0],17,1,,10,,,
+4,Gallbladder,[C23.9],18,1,,10,,,
+4,Pancreas,[C25.0-C25.9],19,1,,10,,,
+4,"Other digestive system","[C22.1, C24.0-C24.9, C26.8-C26.9, C48.0-C48.8]",20,1,,10,,,
+4,Larynx,[C32.0-C32.9],21,1,,10,,,
+4,"Lung and bronchus",[C34.0-C34.9],22,1,,10,,,
+4,"Other respiratory system","[C30.0-C30.1, C31.0-C31.9, C33.9, C38.1-C38.8, C39.0-C39.9]",23,1,,10,,,
+4,"Bones and joints",[C40.0-C41.9],24,1,,10,,,
+4,"Soft tissue (including heart)","[C38.0, C47.0-C47.9, C49.0-C49.9]",25,1,,10,,,
+4,"Melanomas of the skin","[C44.0-C44.9, 8720-8790]",26,1,,,,,
+4,"Other non-epithelial skin",[C44.0-C44.9],27,1,,11,,,
+4,Breast,[C50.0-C50.9],28,1,,10,,,
+4,"Cervix uteri",[C53.0-C53.9],29,1,,10,,,
+4,"Corpus uteri",[C54.0-C54.9],30,1,,10,,,
+4,"Uterus, not otherwise specified",[C55.9],31,1,,10,,,
+4,Ovary,[C56.9],32,1,,10,,,
+4,"Other female genital system","[C51.0-C51.9, C52.9, C57.0-C58.9]",33,1,,10,,,
+4,Prostate,[C61.9],34,1,,10,,,
+4,Testis,[C62.0-C62.9],35,1,,10,,,
+4,Penis,[C60.0-C60.9],36,1,,10,,,
+4,"Other male genital organs",[C63.0-C63.9],37,1,,10,,,
+4,"Urinary bladder (including in situ)",[C67.0-C67.9],38,1,,10,,,
+4,"Kidney and renal pelvis","[C64.9, C65.9]",39,1,,10,,,
+4,Ureter,[C66.9],40,1,,10,,,
+4,"Other urinary organs",[C68.0-C68.9],41,1,,10,,,
+4,"Eye and orbit",[C69.0-C69.9],42,1,,10,,,
+4,Brain,[C71.0-C71.9],43,1,,13,,,
+4,"Cranial nerves and other nervous system","[C71.0-C71.9, 9530-9539; C70.0-C70.9, C72.0-C72.9]",44,1,,10,,,
+4,Thyroid,[C73.9],45,1,,10,,,
+4,"Other endocrine","[C37.9, C74.0-C74.9, C75.0-C75.9]",46,1,,10,,,
+4,"Hodgkin lymphoma",[9650-9667],47,1,,,,,
+4,"Non-Hodgkin lymphoma",,48,1,,14,,,
+4,Myeloma,"[9731, 9732, 9734]",49,1,,,,,
+4,"Acute lymphocytic leukemia","[9826, 9835-9836;C42.0, 9811-9818, 9837;C42.1, 9811-9818, 9837;C42.4, 9811-9818, 9837]",50,1,,,,,
+4,"Chronic lymphocytic leukemia","[C42.0, 9823; C42.1, 9823; C42.4, 9823]",51,1,,,,,
+4,"Acute myeloid leukemia","[9840,9861,9865,9866,9867,9869,9871-9874,9895-9897,9898,9910,9911,9920]",52,1,,,,,
+4,"Chronic myeloid leukemia","[9863, 9875, 9876, 9945, 9946]",53,1,,,,,
+4,"Other leukemia",,54,1,,15,,,
+4,"Other, ill-defined and unknown sites",,55,1,,16,,,
+4,"Colon and rectum","[C18.0-C18.9, C19.9, C20.9, C26.0]",56,1,,10,,,
+4,Mesothelioma,[9050-9055],60,1,,,,,
+4,"Kaposi sarcoma",[9140],61,1,,,,,
+5,"Number of new cancer cases",,1,,,,,,
+5,"Cancer incidence rate",,2,,,24,,,
+5,"Low 95% confidence interval, cancer incidence rate",,3,,,17,,,
+5,"High 95% confidence interval, cancer incidence rate",,4,,,17,,,
+
+Symbol Legend
+Description,Symbol
+"not available for a specific reference period",..
+"less than the limit of detection",<LOD
+"value rounded to 0 (zero) where there is a meaningful distinction between true zero and the value that was rounded",0s
+"data quality: excellent",A
+"data quality: very good",B
+"data quality: good",C
+"data quality: acceptable",D
+"use with caution",E
+"too unreliable to be published",F
+"not applicable",...
+preliminary,p
+revised,r
+"suppressed to meet the confidentiality requirements of the Statistics Act",x
+terminated,t
+
+"Survey Code","Survey Name"
+3207,"Canadian Cancer Registry"
+
+"Subject Code","Subject Name"
+13,Health
+
+"Note ID",Note
+1,"Data sources include Statistics Canada's <a href = ""http://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=3207&Item_Id=1633&lang=en"">Canadian Cancer Registry</a> Database and Demography Division <a href=""https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1710000501"">Population</a> estimates as of July 1st 2017, released September 30th, 2019 . Statistics Canada maintains the CCR which is comprised of data supplied by the provinces and territories whose cooperation is gratefully acknowledged."
+3,"Cancer incidence refers to the number of new cases of primary malignant neoplasms in a population over a given period of time, usually one year. As the CCR is updated annually with new records for current and earlier diagnosis years as well as changes to previous records, the incidence for any given diagnosis year may change from one release to the next. In particular, delays in the reporting of new cases to Statistics Canada typically result in undercounts of cases which are more pronounced in the most recently reported diagnosis year. Generally, the reporting delay ranges between 2% and 3% nationally. The missing cases are added to their appropriate diagnosis year with the reporting of data from a new reference year."
+5,"Although the Canadian Cancer Registry (CCR) strives to achieve national uniformity, reporting procedures and completeness still vary across the country. Specific issues follow: a) Because Quebec relies primarily on hospital data (i.e., hospitalizations or day surgeries) for cancers diagnosed until the end of 2010, the number of cases of some cancers are underestimated particularly for prostate cancer and melanomas of the skin (source: Brisson J, Major D, Pelletier E. Evaluation of the completeness of the Fichier des tumeurs du Québec. Institut national de la santé publique du Québec; 2003). b) Differences may exist between the content of the CCR and the provincial/territorial cancer registries because of incomplete updating of the CCR by the provinces and territories. c) Ontario has no death certificate only (DCO) cases reported in 2017 (around 1420 cases were reported in 2016); Quebec has no DCO cases reported for 2010 (around 1370 cases reported in 2009); Manitoba has not reported DCO cases since 2013 (43 cases were reported in 2012); and Newfoundland and Labrador did not report DCO cases until 2006."
+9,"The table was prepared using the Surveillance, Epidemiology and End Results (SEER) Groups for Primary Site based on the World Health Organization International Classification of Diseases for Oncology, Third Edition (ICD-O-3). Included are all invasive cancers and in situ for bladder. The International Agency for Research on Cancer (IARC) rules for determining multiple primary types have been applied (source: International Agency for Research on Cancer, World Health Organization, International Association of Cancer Registries, and European Network of Cancer Registries. International Rules for Multiple Primary Cancers, ICD-O Third Edition, Internal Report No.2004/02. Lyon: International Agency for Research on Cancer)."
+10,"Excluding histology types 9050 to 9055, 9140, 9590 to 9992."
+11,"Other non-epithelial skin, excluding histology types 8000 to 8005, 8010 to 8046, 8050 to 8084, 8090 to 8110, 8720 to 8790, 9050 to 9055, 9140, 9590 to 9992."
+13,"Brain, excluding histology types 9050 to 9055, 9140, 9530 to 9539, 9590 to 9992."
+14,"Non-Hodgkin lymphoma, 9590 to 9597, 9670 to 9729, 9735 to 9738; 9811 to 9818, all sites except C42.0, C42.1, C42.4; 9823, all sites except C42.0, C42.1, C42.4; 9827, all sites except C42.0, C42.1, C42.4; 9837, all sites except C42.0, C42.1, C42.4."
+15,"Other leukemia, 9733, 9742, 9800, 9801, 9805 to 9809, 9820, 9831 to 9834, 9860, 9870, 9891, 9930, 9931, 9940, 9948, 9963, 9964; C42.0, 9827; C42.1, 9827; C42.4, 9827."
+16,"Other, ill-defined and unknown sites, 9740, 9741, 9750 to 9769, 9950, 9960 to 9962, 9965 to 9967, 9970, 9971, 9975, 9980, 9982 to 9987, 9989, 9991, 9992; C42.0 to C42.4, excluding 9050 to 9055, 9140, 9590 to 9992; C76.0 to C76.8, excluding 9050 to 9055, 9140, 9590 to 9992; C77.0 to C77.9, excluding 9050 to 9055, 9140, 9590 to 9992; C80.9, excluding 9050 to 9055, 9140, 9590 to 9992."
+17,"The 95% confidence interval (CI) illustrates the degree of variability associated with a rate. Wide confidence intervals indicate high variability, thus, these rates should be interpreted and compared with due caution."
+18,"To prevent inappropriate disclosure of health-related information, the actual number of cases of a specific cancer is randomly rounded to a lower or higher multiple of 5; true zeros and actual counts evenly divisible by 5 are not affected. Random rounding is applied to each cell count independently. Specifically, an unbiased random rounding procedure is applied such that numbers ending in 0 or 5 are not rounded; numbers ending in a 1 or 6 are rounded up with a probability of 0.20 and down with a probability of 0.80; numbers ending in 2 or 7 are rounded up and down with probabilities of 0.40 and 0.60, respectively; numbers ending in 3 or 8 are rounded up and down with probabilities of 0.60 and 0.40, respectively; and, numbers ending in 4 or 9 are rounded up and down with probabilities of 0.80 and 0.20, respectively. Consequently, columns and rows will sum to totals only by chance. By design, differences between the rounded and actual counts will never exceed 4 and actual counts are more likely to be rounded to the nearest multiple of 5. The randomly rounded number of cases is used to calculate the incidence rate and 95% confidence limits."
+19,"The following standard symbols are used in this Statistics Canada table: (..) for figures not available for a specific reference period, and (...) for figures not applicable."
+21,"To reduce the number of duplicate cases, a national duplicate resolution process was completed which included cases diagnosed up to December 31, 2016 for all provinces and territories except Quebec. The de-duplication process was last completed for Quebec for all cases diagnosed up to December 31st, 2008."
+22,"Cancer incidence data for Quebec are not available for diagnosis years after 2010. For tables 13-10-0111-01 and 13-10-0747-01, annual case count and rate estimates for Quebec and Canada for the 2011 diagnosis year onward are not provided. Cancer incidence estimates for Canada excluding Quebec were produced for all diagnosis years in this table."
+23,"In October 2014, Ontario implemented a new cancer reporting system, the Ontario Cancer Registry (OCR). The new system has several enhancements that permit the identification of cancer cases that previously went unrecorded. These include the use of more liberal rules for counting multiple primary sites, the use of additional source records and the inclusion of records that were previously not included. The implementation of this new system affects data from the 2010 diagnosis year onward."
+24,"Cancer incidence rates for both sexes were produced using the total population estimate for both males and females even for sex-specific primary cancers (for example, prostate, cervix uteri, testis, and ovary)."
+25,"All cancers combined refers to all invasive cancers excluding non-melanoma skin cancer but also including in situ bladder cancer."
+
+"Correction ID","Correction Date","Correction Note"
+
+

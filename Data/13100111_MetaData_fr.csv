@@ -1,0 +1,159 @@
+﻿"Titre du cube";"Numéro d'identification du produit";"Numéro d'identification de CANSIM";URL;"Notes sur le cube";"État de l'archivage";Fréquence;"Début de la période de référence";"Fin de la période de référence";"Nombre total de dimensions"
+"Nombre et taux de nouveaux cas de cancer primitif, selon le type de cancer, le groupe d’âge et le sexe";13100111;"103-0550";"https://www150.statcan.gc.ca/t1/tbl1/fr/tv.action?pid=1310011101";"1,3,9,21";"ACTIF - un cube qui est disponible au public et qui est toujours mise a jour";Annuelle;"1992-01-01";"2017-01-01";5
+
+"Numéro d'identification de la dimension";"Nom de la dimension";"Notes sur la dimension";"Notes de correction sur la dimension";"Définitions de la dimension"
+1;Géographie;;;
+2;"Groupe d'âge";;;
+3;Sexe;;;
+4;"Types primaires de cancer (CIM-O-3)";"3,9";;
+5;Caractéristiques;"18,19";;
+
+"Numéro d'identification de la dimension";"Nom du membre";"Code sur la classification";"Numéro d'identification du membre";"Numéro d'identification du membre parent";Terminé;"Notes sur le membre";"Notes de correction sur le membre";"Member Geo Attribute Keys";"Définitions du membre"
+1;Canada;"[11124]";1;;;;;;
+1;"Terre-Neuve-et-Labrador";"[10]";2;15;;"5";;;
+1;"Île-du-Prince-Édouard";"[11]";3;15;;;;;
+1;"Nouvelle-Écosse";"[12]";4;15;;;;;
+1;"Nouveau-Brunswick";"[13]";5;15;;;;;
+1;Québec;"[24]";6;15;;"5,22";;;
+1;Ontario;"[35]";7;15;;"5,23";;;
+1;Manitoba;"[46]";8;15;;"5";;;
+1;Saskatchewan;"[47]";9;15;;;;;
+1;Alberta;"[48]";10;15;;;;;
+1;"Colombie-Britannique";"[59]";11;15;;;;;
+1;Yukon;"[60]";12;15;;;;;
+1;"Territoires du Nord-Ouest";"[61]";13;15;;;;;
+1;Nunavut;"[62]";14;15;;;;;
+1;"Canada (excluant le Québec)";;15;;;"22";;;
+2;"Total, tous les âges";;1;;;;;;
+2;"0 à 4 ans";;2;1;;;;;
+2;"5 à 9 ans";;3;1;;;;;
+2;"10 à 14 ans";;4;1;;;;;
+2;"15 à 19 ans";;5;1;;;;;
+2;"20 à 24 ans";;6;1;;;;;
+2;"25 à 29 ans";;7;1;;;;;
+2;"30 à 34 ans";;8;1;;;;;
+2;"35 à 39 ans";;9;1;;;;;
+2;"40 à 44 ans";;10;1;;;;;
+2;"45 à 49 ans";;11;1;;;;;
+2;"50 à 54 ans";;12;1;;;;;
+2;"55 à 59 ans";;13;1;;;;;
+2;"60 à 64 ans";;14;1;;;;;
+2;"65 à 69 ans";;15;1;;;;;
+2;"70 à 74 ans";;16;1;;;;;
+2;"75 à 79 ans";;17;1;;;;;
+2;"80 à 84 ans";;18;1;;;;;
+2;"Groupe d'âge, non déclaré";;20;1;;;;;
+2;"85 à 89 ans";;21;1;;;;;
+2;"90 ans et plus";;22;1;;;;;
+3;"Les deux sexes";;1;;;;;;
+3;Hommes;;2;1;;;;;
+3;Femmes;;3;1;;;;;
+4;"Total, tous les sièges primaires de cancer";"[C00.0-C80.9]";1;;;"25";;;
+4;Lèvre;"[C00.0-C00.9]";2;1;;"10";;;
+4;Langue;"[C01.9-C02.9]";3;1;;"10";;;
+4;"Glande salivaire";"[C07.9-C08.9]";4;1;;"10";;;
+4;"Plancher de la bouche";"[C04.0-C04.9]";5;1;;"10";;;
+4;"Gencive et autres localisations de la bouche";"[C03.0-C03.9, C05.0-C05.9, C06.0-C06.9]";6;1;;"10";;;
+4;Nasopharynx;"[C11.0-C11.9]";7;1;;"10";;;
+4;Oropharynx;"[C10.0-C10.9]";8;1;;"10";;;
+4;Hypopharynx;"[C12.9, C13.0-C13.9]";9;1;;"10";;;
+4;"Autres localisations de la cavité buccale et du pharynx";"[C09.0-C09.9, C14.0-C14.8]";10;1;;"10";;;
+4;Oesophage;"[C15.0-C15.9]";11;1;;"10";;;
+4;Estomac;"[C16.0-C16.9]";12;1;;"10";;;
+4;"Intestin grêle";"[C17.0-C17.9]";13;1;;"10";;;
+4;"Côlon à l'exclusion du rectum";"[C18.0-C18.9, C26.0]";14;56;;"10";;;
+4;"Rectum et jonction rectosigmoïde";"[C19.9, C20.9]";15;56;;"10";;;
+4;"Anus, canal anal et anorectum";"[C21.0-C21.8]";16;1;;"10";;;
+4;Foie;"[C22.0]";17;1;;"10";;;
+4;"Vésicule biliaire";"[C23.9]";18;1;;"10";;;
+4;Pancréas;"[C25.0-C25.9]";19;1;;"10";;;
+4;"Autres localisations de l'appareil digestif";"[C22.1, C24.0-C24.9, C26.8-C26.9, C48.0-C48.8]";20;1;;"10";;;
+4;Larynx;"[C32.0-C32.9]";21;1;;"10";;;
+4;"Poumon et bronche";"[C34.0-C34.9]";22;1;;"10";;;
+4;"Autres localisations de l'appareil respiratoire";"[C30.0-C30.1, C31.0-C31.9, C33.9, C38.1-C38.8, C39.0-C39.9]";23;1;;"10";;;
+4;"Os et articulations";"[C40.0-C41.9]";24;1;;"10";;;
+4;"Tissus mous (y compris le coeur)";"[C38.0, C47.0-C47.9, C49.0-C49.9]";25;1;;"10";;;
+4;"Mélanomes de la peau";"[C44.0-C44.9, 8720-8790]";26;1;;;;;
+4;"Autres tumeurs non épithéliales de la peau";"[C44.0-C44.9]";27;1;;"11";;;
+4;Sein;"[C50.0-C50.9]";28;1;;"10";;;
+4;"Col utérin";"[C53.0-C53.9]";29;1;;"10";;;
+4;"Corps utérin";"[C54.0-C54.9]";30;1;;"10";;;
+4;"Utérus, sans autre indication";"[C55.9]";31;1;;"10";;;
+4;Ovaire;"[C56.9]";32;1;;"10";;;
+4;"Autres organes génitaux féminins";"[C51.0-C51.9, C52.9, C57.0-C58.9]";33;1;;"10";;;
+4;Prostate;"[C61.9]";34;1;;"10";;;
+4;Testicule;"[C62.0-C62.9]";35;1;;"10";;;
+4;Verge;"[C60.0-C60.9]";36;1;;"10";;;
+4;"Autres organes génitaux masculins";"[C63.0-C63.9]";37;1;;"10";;;
+4;"Vessie (y compris in situ)";"[C67.0-C67.9]";38;1;;"10";;;
+4;"Rein et bassinet du rein";"[C64.9, C65.9]";39;1;;"10";;;
+4;Uretère;"[C66.9]";40;1;;"10";;;
+4;"Autres organes de l'appareil urinaire";"[C68.0-C68.9]";41;1;;"10";;;
+4;"Oeil et orbite";"[C69.0-C69.9]";42;1;;"10";;;
+4;Cerveau;"[C71.0-C71.9]";43;1;;"13";;;
+4;"Nerfs crâniens et autres parties du système nerveux";"[C71.0-C71.9, 9530-9539; C70.0-C70.9, C72.0-C72.9]";44;1;;"10";;;
+4;Thyroïde;"[C73.9]";45;1;;"10";;;
+4;"Autre endocrine";"[C37.9, C74.0-C74.9, C75.0-C75.9]";46;1;;"10";;;
+4;"Lymphome hodgkinien";"[9650-9667]";47;1;;;;;
+4;"Lymphome non hodgkinien";;48;1;;"14";;;
+4;Myélome;"[9731, 9732, 9734]";49;1;;;;;
+4;"Leucémie lymphocytaire aiguë";"[9826, 9835-9836;C42.0, 9811-9818, 9837;C42.1, 9811-9818, 9837;C42.4, 9811-9818, 9837]";50;1;;;;;
+4;"Leucémie lymphocytaire chronique";"[C42.0, 9823; C42.1, 9823; C42.4, 9823]";51;1;;;;;
+4;"Leucémie myéloïde aiguë";"[9840,9861,9865,9866,9867,9869,9871-9874,9895-9897,9898,9910,9911,9920]";52;1;;;;;
+4;"Leucémie myéloïde chronique";"[9863, 9875, 9876, 9945, 9946]";53;1;;;;;
+4;"Autre leucémie";;54;1;;"15";;;
+4;"Autres localisations, localisations mal définies et inconnues";;55;1;;"16";;;
+4;"Côlon et rectum";"[C18.0-C18.9, C19.9, C20.9, C26.0]";56;1;;"10";;;
+4;Mésothéliome;"[9050-9055]";60;1;;;;;
+4;"Sarcome de Kaposi";"[9140]";61;1;;;;;
+5;"Nombre de nouveaux cas de cancer";;1;;;;;;
+5;"taux d'incidence du cancer";;2;;;"24";;;
+5;"Limite inférieure de l'intervalle de confiance de 95 %, taux d'incidence du cancer";;3;;;"17";;;
+5;"Limite supérieure de l'intervalle de confiance de 95 %, taux d'incidence du cancer";;4;;;"17";;;
+
+Légende Symbole
+Description;Symbole
+"indisponible pour une période de référence précise";".."
+"inférieur à la limite de détection";<LDD
+"valeur arrondie à 0 (zéro) là où il y a une distinction importante entre le zéro absolu et la valeur arrondie";"0s"
+"qualité des données : excellente";A
+"qualité des données : très bonne";B
+"qualité des données : bonne";C
+"qualité des données : acceptable";D
+"à utiliser avec prudence";E
+"trop peu fiable pour être publié";F
+"n'ayant pas lieu de figurer";"..."
+provisoire;p
+révisé;r
+"confidentiel en vertu des dispositions de la Loi sur la statistique";x
+terminé;t
+
+"Code d'enquête";"Nom de l'enquête"
+"3207";"Registre canadien du cancer"
+
+"Code du sujet";"Nom du sujet"
+"13";Santé
+
+"Numéro d'identification de la note";Note
+1;"Les sources de données comprennent la base de données du <a href= ""http://www23.statcan.gc.ca/imdb/p2SV_f.pl?Function=getSurvey&SDDS=3207&Item_Id=1633&lang=fr"">Registre canadien du cancer</a> (RCC) de Statistique Canada et les estimations de la <a href= ""https://www150.statcan.gc.ca/t1/tbl1/fr/tv.action?pid=1710000501"">population</a> produites par la Division de la démographie en date du 1er juillet 2017, publiées le 30 septembre 2019. Le RCC est tenu à jour par Statistique Canada et comprend les données fournies par les provinces et les territoires dont la collaboration est grandement appréciée."
+3;"L'incidence du cancer fait référence au nombre de nouveaux cas de tumeurs malignes primitives dans une population au cours d'une période donnée, généralement un an. Étant donné que le RCC est mis à jour tous les ans à la suite de l'ajout de nouveaux enregistrements pour les années de diagnostic actuelles et antérieures, ainsi que de changements aux enregistrements antérieurs, l'incidence d'une année de diagnostic donnée peut changer d'une version à une autre. Plus particulièrement, les données relatives à l'année la plus récente ne comprennent habituellement pas le nombre total de cas, en raison du délai de déclaration des nouveaux cas de cancer à Statistique Canada. En général, le délai de déclaration varie de 2 % à 3 % à l'échelle nationale. Les cas manquants sont ajoutés aux années correspondant à la date du diagnostic, au moment de la déclaration des données pour une année de référence ultérieure."
+5;"Bien que le programme du Registre canadien du cancer (RCC) vise à atteindre l'uniformité à l'échelle nationale, les procédures de déclaration des cas et l'intégralité des données varient encore selon la province ou le territoire. Parmi les problèmes particuliers, il y a les suivants : a) Puisque le Québec se fie principalement aux données d'hôpitaux (p. ex. hospitalisations ou chirurgies d'un jour) pour les cancers diagnostiqués jusqu'à la fin de 2010, le nombre de cas de certains cancers sont sous-estimés, particulièrement ceux du cancer de la prostate et du cancer de la peau avec présence de mélanome (source : Brisson J, Major D, Pelletier E. Évaluation de l'exhaustivité du Fichier des tumeurs du Québec. Institut national de la santé publique du Québec; 2003). b) Il peut exister des différences entre le contenu du RCC et celui des registres provinciaux et territoriaux du cancer, en raison de la mise à jour incomplète du RCC par les provinces et territoires. c) En 2017, l'Ontario ne compte aucun cas diagnostiqué à partir du certificat de décès seulement (environ 1 420 cas semblables ont été déclarés en 2016); le Québec n'en a déclaré aucun pour 2010 (environ 1 370 cas déclarés en 2009); le Manitoba n'a déclaré aucun cas diagnostiqué à partir du certificat de décès seulement depuis 2013 (43 cas ont été déclarés en 2012); et Terre-Neuve-et-Labrador ne déclarait pas de cas semblables avant 2006."
+9;"Le tableau a été préparé en se servant des groupes du « Surveillance, Epidemiology and End Results (SEER) » pour les sièges primaires selon la Classification internationale des maladies de l'Organisation mondiale de la Santé, Oncologie, troisième édition (CIM-O-3). Tous les sièges invasifs et in situ du cancer de la vessie sont compris. Les règles du Centre International de Recherche sur le Cancer (CIRC) pour déterminer de multiples types primitifs ont été appliquées (source : Centre international de recherche sur le cancer, Organisation mondiale de la Santé, Association internationale des registres du cancer et Réseau européen des registres du cancer. International Rules for Multiple Primary Cancers, CIM-O, troisième édition, rapport interne no 2004/02. Lyon : Centre international de recherche sur le cancer)."
+10;"À l'exclusion des types histologiques 9050 à 9055, 9140, 9590 à 9992."
+11;"Autres tumeurs non épithéliales de la peau, à l'exclusion des types histologiques 8000 à 8005, 8010 à 8046, 8050 à 8084, 8090 à 8110, 8720 à 8790, 9050 à 9055, 9140, 9590 à 9992."
+13;"Cerveau, à l'exclusion des types histologiques 9050 à 9055, 9140, 9530 à 9539, 9590 à 9992."
+14;"Lymphome non hodgkinien, 9590 à 9597, 9670 à 9729, 9735 à 9738; 9811 à 9818, tous les sièges sauf C42.0, C42.1, C42.4; 9823, tous les sièges sauf C42.0, C42.1, C42.4; 9827, tous les sièges sauf C42.0, C42.1, C42.4; 9837, tous les sièges sauf C42.0, C42.1, C42.4."
+15;"Autres leucémies, 9733, 9742, 9800, 9801, 9805 à 9809, 9820, 9831 à 9834, 9860, 9870, 9891, 9930, 9931, 9940, 9948, 9963, 9964; C42.0, 9827; C42.1, 9827; C42.4, 9827."
+16;"Autres localisations, localisations mal définies et inconnues, 9740, 9741, 9750 à 9769, 9950, 9960 à 9962, 9965 à  9967, 9970, 9971, 9975, 9980, 9982 à 9987, 9989, 9991, 9992; C42.0 à C42.4, à l'exclusion de 9050 à 9055, 9140, 9590 à 9992; C76.0 à C76.8, à l'exclusion de 9050 à 9055, 9140, 9590 à 9992; C77.0 à C77.9, à l'exclusion de 9050 à 9055, 9140, 9590 à 9992; C80.9, à l'exclusion de 9050 à 9055, 9140, 9590 à 9992."
+17;"L'intervalle de confiance (IC) de 95 % témoigne du degré de variabilité d'un taux. Un large intervalle de confiance indique une grande variabilité; aussi faut-il interpréter et comparer ces taux avec prudence."
+18;"Afin d'éviter la divulgation inappropriée d'information sur la santé, le nombre réel de cas d'un type particulier de cancer est arrondi aléatoirement à un multiple inférieur ou supérieur de 5; les vraies valeurs nulles et les nombres réels exactement divisibles par 5 ne sont pas touchés. L'arrondissement aléatoire est appliqué indépendamment à chaque fréquence par cellule. Plus précisément, une méthode d'arrondissement aléatoire sans biais est appliquée de manière que les nombres se terminant par 0 ou par 5 ne sont pas arrondis, les nombres se terminant par 1 ou par 6 sont arrondis au multiple supérieur avec une probabilité de 0,20 et au multiple inférieur avec une probabilité de 0,80, les nombres se terminant par 2 ou par 7 sont arrondis au multiple supérieur et au multiple inférieur avec une probabilité de 0,40 et de 0,60 respectivement, les nombres se terminant par 3 ou par 8 sont arrondis au multiple supérieur et au multiple inférieur avec une probabilité de 0,60 et de 0,40 respectivement et les nombres se terminant par 4 ou par 9 sont arrondis au multiple supérieur et au multiple inférieur avec une probabilité de 0,80 et de 0,20 respectivement. Par conséquent, les sommes de colonne et les sommes de ligne ne correspondront aux totaux que par hasard. De par la conception, les différences entre les nombres arrondis et réels ne seront jamais supérieures à 4 et les nombres réels sont plus susceptibles d'être arrondis au multiple de 5 le plus près. Le nombre de cas arrondi aléatoirement est utilisé pour calculer le taux d'incidence et les limites de confiance à 95 %."
+19;"Les signes conventionnels suivants sont employés dans ce tableau de Statistique Canada : (..) pour les nombres non disponibles pour une période de référence précise, et (...) pour les nombres n'ayant pas lieu de figurer."
+21;"Pour réduire le nombre de doublons, un processus national de résolution des enregistrements en double a été suivi, qui comprenait les cas diagnostiqués jusqu'au 31 décembre 2016, dans tous les territoires et provinces, à l'exception du Québec. Le dernier processus d'élimination des doublons a été réalisé pour le Québec pour tous les cas diagnostiqués jusqu'au 31 décembre 2008."
+22;"Les données sur l'incidence du cancer au Québec ne sont pas disponibles pour les années de diagnostic après 2010. En ce qui concerne les tableaux 13-10-0111-01 and 13-10-0747-01, les estimations annuelles sur le dénombrement des cas et le taux pour le Québec et le Canada pour les années de diagnostic 2011 et les années ultérieures ne sont pas fournies. Les estimations sur l'incidence du cancer au Canada, à l'exclusion du Québec, ont été produites pour toutes les années de diagnostic de ce tableau."
+23;"En octobre 2014, l'Ontario a mis en oeuvre un nouveau système de déclaration des cas de cancer, le Registre du cancer de l'Ontario. Le nouveau système comporte de nombreuses améliorations qui permettent l'identification des cas de cancer qui n'étaient pas enregistrés dans le passé. Parmi ces améliorations, il y a l'utilisation de règles plus souples pour dénombrer les sièges primaires multiples, l'utilisation d'enregistrements sources additionnels, et l'ajout d'enregistrements qui n'étaient pas utilisés précédemment. La mise en oeuvre de ce nouveau système a une incidence sur les données de l'année de diagnostic 2010 et des années ultérieures."
+24;"Les taux d'incidence du cancer pour les deux sexes ont été produits au moyen de l'estimation démographique totale pour les hommes et les femmes, même dans le cas des cancers primitifs propres à un sexe (par exemple, prostate, col de l'utérus, testicule et ovaire)."
+25;"Tous les types de cancer confondus correspondent à tous les cancers invasifs excluant le cancer de la peau autre que le mélanome, mais y compris le cancer in situ de la vessie."
+
+"Numéro d'identification de la correction";"Date de la correction";"Note sur la correction"
+
+

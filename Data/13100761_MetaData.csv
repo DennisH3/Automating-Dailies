@@ -1,0 +1,138 @@
+﻿"Cube Title","Product Id","CANSIM Id",URL,"Cube Notes","Archive Status",Frequency,"Start Reference Period","End Reference Period","Total number of dimensions"
+"Number and rates of new primary cancer cases, by stage at diagnosis, selected cancer type, age group and sex",13100761,,"https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310076101",1;2;3;4;9,"CURRENT - a cube available to the public and that is current",Annual,2011-01-01,2017-01-01,6
+
+"Dimension ID","Dimension name","Dimension Notes","Dimension Definitions"
+1,Geography,,
+2,"Age group",,
+3,Sex,,
+4,"Primary types of cancer (ICD-O-3)",3;4,
+5,"Stage at diagnosis ",14;15,
+6,Characteristics,7;8,
+
+"Dimension ID","Member Name","Classification Code","Member ID","Parent Member ID",Terminated,"Member Notes","Member Definitions"
+1,Canada,[11124],1,,,10,
+1,"Newfoundland and Labrador",[10],2,15,,3,
+1,"Prince Edward Island",[11],3,15,,,
+1,"Nova Scotia",[12],4,15,,,
+1,"New Brunswick",[13],5,15,,13,
+1,Quebec,[24],6,15,,3;10,
+1,Ontario,[35],7,15,,3;11,
+1,Manitoba,[46],8,15,,3,
+1,Saskatchewan,[47],9,15,,3,
+1,Alberta,[48],10,15,,,
+1,"British Columbia",[59],11,15,,,
+1,Yukon,[60],12,15,,,
+1,"Northwest Territories",[61],13,15,,,
+1,Nunavut,[62],14,15,,,
+1,"Canada excluding Quebec",,15,,,10,
+2,"Total, all ages",,1,,,,
+2,"0 to 19 years",,2,1,,,
+2,"20 to 29 years",,3,1,,,
+2,"30 to 39 years",,4,1,,,
+2,"40 to 49 years",,5,1,,,
+2,"50 to 59 years",,6,1,,,
+2,"60 to 69 years",,7,1,,,
+2,"70 to 79 years",,8,1,,,
+2,"80 to 89 years",,9,1,,,
+2,"90 years and over",,10,1,,,
+3,"Both sexes",,1,,,,
+3,Males,,2,1,,,
+3,Females,,3,1,,,
+4,"Colon and rectum","[C18.0-C18.9, C19.9, C20.9, C26.0]",1,,,5,
+4,"Colon excluding rectum","[C18.0-C18.9, C26.0]",2,1,,5,
+4,"Rectum and rectosigmoid","[C19.9, C20.9]",3,1,,5,
+4,"Lung and bronchus",[C34.0-C34.9],4,,,5;17,
+4,Breast,[C50.0-C50.9],5,,,5;16,
+4,"Cervix uteri",[C53.0-C53.9],6,,,5;13,
+4,Prostate,[C61.9],7,,,5,
+5,"All stages combined (Collaborative Stage)",,1,,,14;25,
+5,"Stage 0 (Collaborative Stage)",,2,1,,14;18,
+5,"Stage I (Collaborative Stage)",,3,1,,14;19,
+5,"Stage II (Collaborative Stage)",,4,1,,14;20,
+5,"Stage III (Collaborative Stage)",,5,1,,14;21,
+5,"Stage IV (Collaborative Stage)",,6,1,,14;22,
+5,"Stage unknown (Collaborative Stage)",,7,1,,14;23,
+5,"Stage not available (Collaborative Stage)",,8,1,,14;24,
+5,"All stages combined (AJCC TNM)",,9,,,15;25,
+5,"Stage 0 (Clinical stage)",,10,9,,15;18;26,
+5,"Stage I (Clinical stage)",,11,9,,15;19;26,
+5,"Stage II (Clinical stage)",,12,9,,15;20;26,
+5,"Stage III (Clinical stage)",,13,9,,15;21;26,
+5,"Stage IV (Clinical stage)",,14,9,,15;22;26,
+5,"Stage unknown (Clinical stage)",,15,9,,15;23;26,
+5,"Stage not available (Clinical stage)",,16,9,,15;24;26,
+5,"Stage 0 (Pathologic stage)",,17,9,,15;18;26,
+5,"Stage I (Pathologic stage)",,18,9,,15;19;27,
+5,"Stage II (Pathologic stage)",,19,9,,15;20;27,
+5,"Stage III (Pathologic stage)",,20,9,,15;27,
+5,"Stage IV (Pathologic stage)",,21,9,,15;21;22;27,
+5,"Stage unknown (Pathologic stage)",,22,9,,15;23;27,
+5,"Stage not available (Pathologic stage)",,23,9,,15;24;27,
+5,"Stage 0 (Post therapy stage)",,24,9,,15;18;28,
+5,"Stage I (Post therapy stage)",,25,9,,15;19;28,
+5,"Stage II (Post therapy stage)",,26,9,,15;20;28,
+5,"Stage III (Post therapy stage)",,27,9,,15;21;28,
+5,"Stage IV (Post therapy stage)",,28,9,,15;22;28,
+5,"Stage unknown (Post therapy stage)",,29,9,,15;23;28,
+5,"Stage not available (Post therapy stage)",,30,9,,15;24;28,
+6,"Total number of cancer cases ",,1,,,,
+6,"Cancer incidence rate ",,2,,,12,
+6,"Low 95% confidence interval, cancer incidence rate",,3,,,6,
+6,"High 95% confidence interval, cancer incidence rate",,4,,,6,
+
+Symbol Legend
+Description,Symbol
+"not available for a specific reference period",..
+"less than the limit of detection",<LOD
+"value rounded to 0 (zero) where there is a meaningful distinction between true zero and the value that was rounded",0s
+"data quality: excellent",A
+"data quality: very good",B
+"data quality: good",C
+"data quality: acceptable",D
+"use with caution",E
+"too unreliable to be published",F
+"not applicable",...
+preliminary,p
+revised,r
+"suppressed to meet the confidentiality requirements of the Statistics Act",x
+terminated,t
+
+"Survey Code","Survey Name"
+3207,"Canadian Cancer Registry"
+
+"Subject Code","Subject Name"
+13,Health
+
+"Note ID",Note
+1,"Data sources include Statistics Canada's <a href = ""http://www23.statcan.gc.ca/imdb/p2SV.pl?Function=getSurvey&SDDS=3207&Item_Id=1633&lang=en"">Canadian Cancer Registry</a> Database and Demography Division <a href=""https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1710000501"">Population</a> estimates as of July 1st 2017, released September 30th, 2019. Statistics Canada maintains the CCR which is comprised of data supplied by the provinces and territories whose cooperation is gratefully acknowledged."
+2,"Cancer incidence refers to the number of new cases of primary malignant neoplasms in a population over a given period of time, usually one year. As the Canadian Cancer Registry (CCR) is updated annually with new records for current and earlier diagnosis years as well as changes to previous records, the incidence for any given diagnosis year may change from one release to the next. In particular, delays in the reporting of new cases to Statistics Canada typically result in undercounts of cases which are more pronounced in the most recently reported diagnosis year. Generally, the reporting delay ranges between 2% and 3% nationally. The missing cases are added to their appropriate diagnosis year with the reporting of data from a new reference year."
+3,"Although the Canadian Cancer Registry (CCR) strives to achieve national uniformity, reporting procedures and completeness still vary across the country. Specific issues follow: a) Because Quebec relies primarily on hospital data (i.e., hospitalizations or day surgeries) for cancers diagnosed until the end of 2010, the number of cases of some cancers are underestimated particularly for prostate cancer and melanomas of the skin (source: Brisson J, Major D, Pelletier E. Evaluation of the completeness of the Fichier des tumeurs du Québec. Institut national de la santé publique du Québec; 2003). b) Differences may exist between the content of the CCR and the provincial/territorial cancer registries because of incomplete updating of the CCR by the provinces and territories. c) Ontario has no death certificate only (DCO) cases reported in 2017 (around 1420 cases were reported in 2016); Quebec has no DCO cases reported for 2010 (around 1370 cases reported in 2009); Manitoba has not reported DCO cases since 2013 (43 cases were reported in 2012); and Newfoundland and Labrador did not report DCO cases until 2006."
+4,"The table was prepared using the Surveillance, Epidemiology and End Results (SEER) Groups for Primary Site based on the World Health Organization International Classification of Diseases for Oncology, Third Edition (ICD-O-3). Included are all invasive cancers and in situ for bladder. The International Agency for Research on Cancer (IARC) rules for determining multiple primary types have been applied (source: International Agency for Research on Cancer, World Health Organization, International Association of Cancer Registries, and European Network of Cancer Registries. International Rules for Multiple Primary Cancers, ICD-O Third Edition, Internal Report No.2004/02. Lyon: International Agency for Research on Cancer)."
+5,"Excluding histology types 9050 to 9055, 9140, 9590 to 9992."
+6,"The 95% confidence interval (CI) illustrates the degree of variability associated with a rate. Wide confidence intervals indicate high variability, thus, these rates should be interpreted and compared with due caution."
+7,"To prevent inappropriate disclosure of health-related information, the actual number of cases of a specific cancer is randomly rounded to a lower or higher multiple of 5; true zeros and actual counts evenly divisible by 5 are not affected. Random rounding is applied to each cell count independently. Specifically, an unbiased random rounding procedure is applied such that numbers ending in 0 or 5 are not rounded; numbers ending in a 1 or 6 are rounded up with a probability of 0.20 and down with a probability of 0.80; numbers ending in 2 or 7 are rounded up and down with probabilities of 0.40 and 0.60, respectively; numbers ending in 3 or 8 are rounded up and down with probabilities of 0.60 and 0.40, respectively; and, numbers ending in 4 or 9 are rounded up and down with probabilities of 0.80 and 0.20, respectively. Consequently, columns and rows will sum to totals only by chance. By design, differences between the rounded and actual counts will never exceed 4 and actual counts are more likely to be rounded to the nearest multiple of 5. The randomly rounded number of cases is used to calculate the incidence rate and 95% confidence limits."
+8,"The following standard symbols are used in this Statistics Canada table: (..) for figures not available for a specific reference period, and (...) for figures not applicable."
+9,"To reduce the number of duplicate cases, a national duplicate resolution process was completed which included cases diagnosed up to December 31, 2017 for all provinces and territories except Quebec. The de-duplication process was last completed for Quebec for all cases diagnosed up to December 31st, 2008."
+10,"Cancer staging data from Quebec have not been submitted to the Canadian Cancer Registry (CCR). Annual case counts and rate estimates are therefore not available for the following geographies: Canada and Quebec. Cancer incidence estimates by cancer stage for Canada excluding Quebec were produced for all diagnosis years in this table."
+11,"In October 2014, Ontario implemented a new cancer reporting system, the Ontario Cancer Registry (OCR). The new system has several enhancements that permit the identification of cancer cases that previously went unrecorded. These include the use of more liberal rules for counting multiple primary sites, the use of additional source records and the inclusion of records that were previously not included. The implementation of this new system affects data from the 2010 diagnosis year onward."
+12,"Cancer incidence rates for both sexes were produced using the total population estimate for both males and females even for sex-specific primary cancers (breast, prostate and cervix uteri)."
+13,"No staging data from New Brunswick are available for cervical cancer. "
+14,"For the 2011-2017 diagnosis years, the staging of the cases was done using the Collaborative Stage (CS) framework as described in the seventh edition of the American Joint Committee on Cancer (AJCC) Cancer Staging Manual, Springer, 2010."
+15,"For diagnosis years 2018 and onward, the staging of the cases was done using the eighth edition of the American Joint Committee on Cancer (AJCC) Cancer Staging Manual, Springer, 2018. With this staging framework, each cancer case can have up to three different stage values depending on the information available: clinical, pathologic, and post therapy. Given this state of affairs, the overall number of valid stage values may exceed the number of staged tumours."
+16,"Female breast cancer only. Male breast cancer cases were excluded."
+17,"Occult-stage non-small cell lung cancer cases were excluded."
+18,"Stage 0: There is no evidence of cancer cells breaking out of the part of the organ where they started, or getting through to or invading normal tissue."
+19,"Stage I: Tumour is small and contained within the organ in which it started."
+20,"Stage II: Tumour is larger and may have begun to spread."
+21,"Stage III: Tumour is large and has spread into nearby tissues and lymph nodes."
+22,"Stage IV: Cancer has spread through the blood or lymphatic system to distant sites in the body."
+23,"Unknown-stage cancer cases are cancer cases that were staged but for which missing information on some of the components of the staging process (tumour, lymph nodes, metastases, or other site-specific information) precluded the ascertainment of a valid stage value."
+24,"Cancer stage is not available for one of the following reasons: 1-the cancer was not staged; 2-the cancer was deemed ""not applicable/out of scope"" because it did not meet the criteria for the staging process; 3-the staging algorithm resulted in an error; 4-the cancer was staged using another staging framework; 5-any other reason that resulted in a missing or blank value for cancer stage on the data file."
+25,"The category ""all stages combined"" includes all possible stage values in this table (0, I, II, III, IV, unknown, not available)."
+26,"Clinical stage classification is based on patient history, physical examination and any imaging done before initiation of treatment, if available."
+27,"Pathological stage classification is based on clinical stage information supplemented or modified by operative findings and pathological evaluation of the resected specimens. This classification applies when surgery is performed before initiation of adjuvant radiation or systemic therapy."
+28,"Stage determined after treatment for patients receiving systemic and/or radiation therapy alone or as a component of their initial treatment, or as neoadjuvant therapy before planned surgery."
+
+"Correction ID","Correction Date","Correction Note"
+
+
