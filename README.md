@@ -1,11 +1,13 @@
 [(Français)](#le-nom-du-projet)
 
-## Automating Dailies
+# Automating Dailies
 
-# R Version
+This program assists data analysts in writing short articles, Dailies, where they can load a data source, manipulate it, and insert values into paragraphs.
+
+## R Version
 R 4.0.5
 
-# Files
+## Files
 
 There are 2 main files that can be referred to:
 - Daily_Replication.Rmd
@@ -14,7 +16,7 @@ There are 2 main files that can be referred to:
 The functions used in these notebooks can be found in:
 - daily_functions.R
 
-# Code dependencies
+## Code dependencies
 
 This file uses four packages: tidyverse, data.table, janitor, and plotly.
 
@@ -25,7 +27,7 @@ This file uses four packages: tidyverse, data.table, janitor, and plotly.
 
 Ensure that you are using R version 3.6.2 or above. You can see and change what version of R you are using in RStudio by going to the Tools tab -> Global options -> R Version.
 
-# Data
+## Data
 
 Two full tables were downloaded as csv files.
 - 13100111 — used in Daily_Replication.Rmd (https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=1310011101)
@@ -33,7 +35,7 @@ Two full tables were downloaded as csv files.
 
 Metadata for all the data is also provided.
 
-# Daily
+## Daily
 
 The daily replicated was the Canadian cancer statistics, 2020 which can be found here: https://www150.statcan.gc.ca/n1/daily-quotidien/200922/dq200922b-eng.htm
 
